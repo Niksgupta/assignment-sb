@@ -6,7 +6,7 @@ const Pagination = ({ displayPerPage, onPaginationChange, total }) => {
   useEffect(() => {
     const value = displayPerPage * counter;
     onPaginationChange(value - displayPerPage, value);
-  }, [counter]);
+  }, [counter,onPaginationChange,displayPerPage]);
 
   const onButtonClick = (type) => {
     if (type === "prev") {
@@ -25,16 +25,16 @@ const Pagination = ({ displayPerPage, onPaginationChange, total }) => {
   };
   return (
     <div className="d-flex justify-content-center">
-      <a onClick={() => onButtonClick("prev")} class="previous round">
+      <button onClick={() => onButtonClick("prev")} class="previous round">
         &#8249;
-      </a>
+      </button>
       <div className="page-count">
         <h6>{counter}</h6>
       </div>
 
-      <a onClick={() => onButtonClick("next")} class="next round">
+      <button onClick={() => onButtonClick("next")} class="next round">
         &#8250;
-      </a>
+      </button>
     </div>
   );
 };
