@@ -5,14 +5,13 @@ import Modal from "react-bootstrap/Modal";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
 
 import Button from "react-bootstrap/Button";
 import Pagination from "./Pagination";
 import "../css/PostedJobs.css";
 import JobCard from "./JobCard";
-import home from "../assests/home.png"
-import myJobs from '../assests/myJobs.PNG';
+import home from "../assests/home.png";
+import myJobs from "../assests/myJobs.PNG";
 
 function PostedJobs() {
   const navigate = useNavigate();
@@ -20,7 +19,6 @@ function PostedJobs() {
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   if (location.state !== null) {
     var authTokenOfRecruiter = location.state.authToken;
@@ -30,9 +28,9 @@ function PostedJobs() {
   console.log(authTokenOfRecruiter, "in posted jobs ");
 
   const [jobs, setJobs] = useState([]);
-  const { id } = useParams();
 
   const [displayPerPage, setDisplayPerPage] = useState(12);
+  console.log(setDisplayPerPage);
   const [pagination, setPagination] = useState({
     start: 0,
     end: displayPerPage,
@@ -43,31 +41,27 @@ function PostedJobs() {
   };
 
   useEffect(() => {
+    const getJobs = async () => {
+      let result = await fetch(
+        "https://jobs-api.squareboat.info/api/v1/recruiters/jobs",
+        {
+          headers: {
+            authorization: authTokenOfRecruiter,
+          },
+        }
+      );
+      result = await result.json();
+      console.log(result, "All the jobe belonging to this recruiter");
+      setJobs(result.data.data);
+    };
+
     if (authTokenOfRecruiter !== "") {
       getJobs();
     }
-  }, []);
-
-  const getJobs = async () => {
-    let result = await fetch(
-      "https://jobs-api.squareboat.info/api/v1/recruiters/jobs",
-      {
-        headers: {
-          authorization: authTokenOfRecruiter,
-        },
-      }
-    );
-    result = await result.json();
-    console.log(result, "All the jobe belonging to this recruiter");
-    setJobs(result.data.data);
-  };
-
-  const openApplicants = () => {
-    setShow(true);
-  };
+  }, [authTokenOfRecruiter]);
 
   const logOut = () => {
-    navigate("/",{state: {message: "loggedout"}});
+    navigate("/", { state: { message: "loggedout" } });
   };
 
   if (authTokenOfRecruiter === undefined) {
@@ -81,11 +75,7 @@ function PostedJobs() {
           <Container>
             <Navbar.Brand variant="light" href="#home">
               <a href="#home">
-                <img
-                  src={myJobs}
-                  alt="myJobs"
-                  border="0"
-                ></img>
+                <img src={myJobs} alt="myJobs" border="0"></img>
               </a>
             </Navbar.Brand>
             <Navbar.Toggle />
@@ -97,14 +87,14 @@ function PostedJobs() {
           </Container>
         </Navbar>
       </div>
-      
+
       <div>
-      <div className="home"><img src={home} alt="home"/> <a href='/'>Home</a> </div>
-      <div className="posted-jobs">
-      <h1>Jobs Posted by you </h1>
-      </div>
-       
-        
+        <div className="home">
+          <img src={home} alt="home" /> <a href="/">Home</a>{" "}
+        </div>
+        <div className="posted-jobs">
+          <h1>Jobs Posted by you </h1>
+        </div>
       </div>
 
       <div className="hero-bottom">

@@ -1,14 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import Applicants from "./Applicants";
 
 import "../css/PostedJobs.css";
-import locationImage from '../assests/locationImage.png';
+import locationImage from "../assests/locationImage.png";
 
 function JobCard(props) {
-  const navigate = useNavigate();
   const ref = useRef(null);
   const [jobId, setJobId] = useState("");
   const [applicants, setApplicants] = useState([]);
@@ -26,37 +23,39 @@ function JobCard(props) {
     setJobId(ref.current.id);
   };
 
-  const getApplicants = async () => {
-    console.log("Do I come here");
-    let result = await fetch(
-      `https://jobs-api.squareboat.info/api/v1/recruiters/jobs/${jobId}/candidates`,
-      {
-        headers: {
-          authorization: authTokenOfRecruiter,
-        },
-      }
-    );
-    result = await result.json();
-    console.log(result, "Applicants to this Job");
-    //setJobs(result.data.data);
-    setApplicants(result.data);
-  };
-
   useEffect(() => {
+    const getApplicants = async () => {
+      console.log("Do I come here");
+      let result = await fetch(
+        `https://jobs-api.squareboat.info/api/v1/recruiters/jobs/${jobId}/candidates`,
+        {
+          headers: {
+            authorization: authTokenOfRecruiter,
+          },
+        }
+      );
+      result = await result.json();
+      console.log(result, "Applicants to this Job");
+      //setJobs(result.data.data);
+      setApplicants(result.data);
+    };
+
     if (jobId !== "") {
       getApplicants();
     }
-  }, [jobId]);
+  }, [jobId, authTokenOfRecruiter]);
+
   console.log(applicants, "received?");
   return (
     <div className="card">
       <div className="card-body">
         <div className="job-title">
-        <h5>{props.job.title}</h5>
+          <h5>{props.job.title}</h5>
         </div>
 
-<div className="job-desc"><p>{props.job.description}</p></div>
-        
+        <div className="job-desc">
+          <p>{props.job.description}</p>
+        </div>
 
         <div className="parent">
           <div className="child">

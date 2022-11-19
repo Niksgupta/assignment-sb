@@ -1,6 +1,6 @@
 import HomePage from "./components/HomePage";
 import React from "react";
-import { BrowserRouter, Link, Switch, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import Login from "./components/Login";
 import PostedJobs from "./components/PostedJobs";
@@ -14,9 +14,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/postedjobs" element={<PostedJobs />}></Route>
         <Route path="/noaccess" element={<NoAccess />}></Route>
-        <Route path="*" element={<NoAccess />}>
-        
-        </Route>
+        <Route path="*" element={<NoAccess />}></Route>
       </Routes>
     </div>
   );

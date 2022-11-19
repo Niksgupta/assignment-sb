@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
+
 import "../css/Login.css";
 
-import myJobs from '../assests/myJobs.PNG';
+import myJobs from "../assests/myJobs.PNG";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -27,12 +28,6 @@ function Login() {
   const [error, setError] = useState(null);
 
   const [authToken, setAuthToken] = useState("");
-
-  useEffect(() => {
-    if (userCredentials.email !== "" && userCredentials.password !== "") {
-      loginCall();
-    }
-  }, []);
 
   //checking for email validation
 
@@ -75,21 +70,14 @@ function Login() {
         const data = isJson && (await response.json());
         console.log(data);
         setAuthToken(data.data.token);
-
-        // check for error response
         if (!response.ok) {
-          // get error message from body or default to response status
           const error = (data && data.message) || response.status;
           console.log(error, "err");
           setError(data.message);
           return Promise.reject(error);
         }
-
-        // this.setState({ postId: data.id })
       })
       .catch((error) => {
-        // this.setState({ errorMessage: error.toString() });
-        //setError(data)
         console.error("There was an error!", error);
       });
   };
@@ -102,11 +90,7 @@ function Login() {
           <Container>
             <Navbar.Brand variant="light" href="#home">
               <a href="#home">
-                <img
-                  src={myJobs}
-                  alt="myJobs"
-                  border="0"
-                ></img>
+                <img src={myJobs} alt="myJobs" border="0"></img>
               </a>
             </Navbar.Brand>
             <Navbar.Toggle />
@@ -120,7 +104,6 @@ function Login() {
       </div>
 
       <div>
-      
         <div className="hero-container">
           <div className="item">
             {/* <div className="text">Welcome to MyJobs</div> */} 1

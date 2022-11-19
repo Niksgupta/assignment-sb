@@ -1,37 +1,34 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import myJobs from '../assests/myJobs.PNG';
-import homeImage from '../assests/homeImage.png';
-import companies from '../assests/companies.PNG';
+import myJobs from "../assests/myJobs.PNG";
+import homeImage from "../assests/homeImage.png";
+import companies from "../assests/companies.PNG";
 
 import Button from "react-bootstrap/Button";
 
 import "../css/Home.css";
 
-
 function HomePage() {
-
   const navigate = useNavigate();
 
   const location = useLocation();
 
- console.log(location.state)
+  console.log(location.state);
 
   if (location.state !== null) {
     var loggedOutMessage = location.state.message;
   }
-  const[isLoggedOut, setIsLoggedOut] = useState(false);
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
+  console.log(isLoggedOut);
 
-
-  useEffect(()=>{
-    if(loggedOutMessage ==="loggedout"){
-        setIsLoggedOut(true);
+  useEffect(() => {
+    if (loggedOutMessage === "loggedout") {
+      setIsLoggedOut(true);
     }
-
-  },[loggedOutMessage])
+  }, [loggedOutMessage]);
 
   return (
     <div>
@@ -40,12 +37,7 @@ function HomePage() {
           <Container>
             <Navbar.Brand variant="light" href="#home">
               <a href="#home">
-                <img
-                  src={myJobs}
-                  alt="myJobs"
-                  border="0"
-                ></img>
-                
+                <img src={myJobs} alt="myJobs" border="0"></img>
               </a>
             </Navbar.Brand>
             <Navbar.Toggle />
@@ -76,11 +68,7 @@ function HomePage() {
           </div>
 
           <h3 className="image">
-            <img
-              src={homeImage}
-              alt="homeImage"
-              border="0"
-            />
+            <img src={homeImage} alt="homeImage" border="0" />
           </h3>
         </div>
       </div>
@@ -136,21 +124,18 @@ function HomePage() {
           </div>
         </div>
 
-<div className="third-hero">
-<div class="container">
-          <div className="why-us"></div>
-          <h1>Companies Who Trust Us</h1>
-        </div>
+        <div className="third-hero">
+          <div class="container">
+            <div className="why-us"></div>
+            <h1>Companies Who Trust Us</h1>
+          </div>
 
-
-        <div class="container">
-          <div className="companies-image">
-          <img src={companies} alt="compaines" border="0"/>
+          <div class="container">
+            <div className="companies-image">
+              <img src={companies} alt="compaines" border="0" />
+            </div>
           </div>
         </div>
-        
-</div>
-       
       </div>
     </div>
   );

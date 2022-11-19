@@ -5,12 +5,11 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import "../css/PostedJobs.css";
 
-import curriculum from '../assests/curriculum.png';
+import curriculum from "../assests/curriculum.png";
 
 function Applicants(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   console.log(props, "In applicants");
   const totalApplicants = props.applicants.length;
@@ -18,10 +17,6 @@ function Applicants(props) {
   useEffect(() => {
     setShow(true);
   }, []);
-
-  const closeDialog = () => {
-    setShow(false);
-  };
 
   return (
     <Modal
@@ -38,42 +33,38 @@ function Applicants(props) {
 
       <div>
         <p>Total {totalApplicants} Applicants</p>
-
       </div>
-      {totalApplicants ===0 ? <>
-      
-        <img src={curriculum} alt="curriculum" border="0"/>
-        No Applications Available!
-      </> : 
-            <Row xs={1} md={2} className="applicants">
-            {props.applicants.map((applicant) => (
-              <Col>
-                <Card key={applicant.id}>
-                  <Card.Body>
-                    <div className="name-email">
-                      <p className="circle">
-                        <span class="text">{applicant.name.slice(0, 1)}</span>{" "}
-                      </p>
-                      <h3 className="name">
-                        <b>{applicant.name}</b>
-                      </h3>
-                    </div>
-                    <div className="email">{applicant.email}</div>
-    
-                    <div className="skills">
-                      <h5>Skills:</h5>{" "}
-                    </div>
-                    <div className="skills">
-                    {applicant.skills}
-                    </div>
-                    
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-      }
+      {totalApplicants === 0 ? (
+        <>
+          <img src={curriculum} alt="curriculum" border="0" />
+          No Applications Available!
+        </>
+      ) : (
+        <Row xs={1} md={2} className="applicants">
+          {props.applicants.map((applicant) => (
+            <Col>
+              <Card key={applicant.id}>
+                <Card.Body>
+                  <div className="name-email">
+                    <p className="circle">
+                      <span class="text">{applicant.name.slice(0, 1)}</span>{" "}
+                    </p>
+                    <h3 className="name">
+                      <b>{applicant.name}</b>
+                    </h3>
+                  </div>
+                  <div className="email">{applicant.email}</div>
 
+                  <div className="skills">
+                    <h5>Skills:</h5>{" "}
+                  </div>
+                  <div className="skills">{applicant.skills}</div>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      )}
     </Modal>
   );
 }
