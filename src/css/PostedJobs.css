@@ -1,0 +1,101 @@
+.page-count {
+  margin: 10px;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.previous {
+  background-color: #f1f1f1;
+  color: black;
+}
+
+.next {
+  background-color: #f1f1f1;
+  color: black;
+}
+
+.round {
+  border-radius: 30%;
+}
+
+.circle {
+  height: 35px;
+  width: 35px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: 1px;
+}
+
+.text {
+  margin-left: 15px;
+}
+
+.skills {
+  display: flex;
+  padding: 4px;
+  padding-top: 12px;
+}
+
+.job-desc{
+display: flex;
+}
+
+.job-title{
+display: flex;
+}
+
+.parent {
+  width: 100%;
+  display: table;
+  padding-top: 30px;
+}
+.child {
+  display: table-cell;
+}
+.childinner {
+  margin-left: 10px;
+
+  min-height: 40px;
+}
+.child:first-child .childinner {
+  margin-left: 0;
+}
+
+.name-email {
+  display: flex;
+  justify-content: left;
+}
+
+.name {
+  margin-left: 25px;
+}
+.email {
+  display: flex;
+  margin-left: 55px;
+  margin-top: -10px;
+}
+
+.home{
+  background-color: #1A253C;
+ height: 20px;
+ padding-top: 50px;
+ padding-left:320px ;
+ color: white;
+}
+.posted-jobs{
+ background-color: #1A253C;
+ height: 180px;
+ padding-top: 100px;
+ padding-left:320px ;
+ color: white;
+}
